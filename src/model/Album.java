@@ -30,6 +30,14 @@ public class Album {
 		}
 	}
 	
+	public static Album fromAlbumName(String albumName) {
+		return new Album(albumName, null, null, null);
+	}
+	
+	public static Album fromArtist(String artist) {
+		return new Album(null, artist, null, null);
+	}
+	
 	public void addSong(Song song) {
 		this.songs.add(new Song(song));
 	}
