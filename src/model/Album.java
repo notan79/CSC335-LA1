@@ -51,7 +51,7 @@ public class Album {
 		return this.artist;
 	}
 	
-	public String Genre() {
+	public String getGenre() {
 		return this.genre;
 	}
 	
@@ -63,7 +63,23 @@ public class Album {
 		return this.albumName + "_" + this.artist + ".txt"; 
 	}
 	
-	// toString
+	public ArrayList<Song> getSongs(){
+		ArrayList<Song> temp = new ArrayList<>();
+		for(Song s : this.songs) {
+			temp.add(new Song(s));
+		}
+		return temp;
+	}
+	
+	// Override methods
+	@Override
+	public boolean equals(Object o) {
+		if(o == null) return false;
+		if(o.getClass() != this.getClass()) return false;
+		
+		Album temp = (Album) o;
+		return this.artist.equals(temp.artist) && this.albumName.equals(temp.albumName) && this.year.equals(temp.year);
+	}
 	@Override
 	public String toString() {
 		return this.albumName + "," + this.artist + "," + this.genre + "," + this.year;
