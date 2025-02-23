@@ -4,7 +4,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Hello World");
+		MusicStore store = new MusicStore();
+		System.out.println(store.getAlbums());
+		
 	}
 	
 

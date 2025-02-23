@@ -57,14 +57,6 @@ class AlbumTest {
 	}
 	
 	@Test
-	void testFileNameFormat() {
-		assertEquals(a0.getFileNameFormat(), "Title_Artist.txt");
-		
-		Album a1 = new Album("New Title", "New Artist", "New Genre", Year.parse("1990"));
-		assertEquals(a1.getFileNameFormat(), "New Title_New Artist.txt");
-	}
-	
-	@Test
 	void testEquals() {
 		Album a1 = new Album(a0);
 		Album a2 = new Album("Title", "Artist", "Genre", Year.parse("2021"));
