@@ -3,30 +3,32 @@ package model;
 public final class Song {
 	
 	private final String title;
-	private final String artist; 
 	private Rating rating;
 	private Album album;
 	private boolean isFavorite = false;
 
-	public Song(String title, String artist) {
+	public Song(String title, Album album) {
 		this.title = title;
-		this.artist = artist; 
 		this.rating = Rating.NONE;
+		this.album = new Album(album);
 	}
 	
 	public Song(Song song) {
 		this.title = song.title;
-		this.artist = song.artist; 
 		this.rating = song.rating;
 		this.album = new Album(song.album);
 	}
 	
-	public static Song fromTitle(String title) {
-		return new Song(title, null);
+	private Song(String title) {
+		this.title = title;
 	}
 	
-	public static Song fromArtist(String artist) {
-		return new Song(null, artist);
+	public static Song fromTitle(String title) {
+		return new Song(title);
+	}
+	
+	public static Song fromAlbum(Album album) {
+		return new Song(null, new Album(album));
 	}
 	
 	// Getters
@@ -35,7 +37,7 @@ public final class Song {
 	}
 
 	public String getArtist() {
-		return artist;
+		return this.album.getArtist();
 	}
 	
 	public Rating getRating() {
@@ -43,6 +45,7 @@ public final class Song {
 	}
 	
 	public Album getAlbum() {
+		if(this.album == null) return null;
 		return new Album(this.album);
 	}
 	
@@ -56,13 +59,25 @@ public final class Song {
 	}
 	
 	public void setRating(Rating rate) {
+		if(rate == Rating.FIVE) this.setFavorite();
 		this.rating = rate;
 	}
 	
-	// toString
+	// Override methods
+	@Override
+	public boolean equals(Object o) {
+		if(o == null || this.album == null) return false;
+		if(o.getClass() != this.getClass()) return false;
+		
+		Song temp = (Song) o;
+		if(temp.album == null) return false;
+		
+		return this.getArtist().equals(temp.getArtist()) && this.title.equals(temp.title);
+	}
+	
 	@Override
 	public String toString() {
-		return this.title + " by " + this.artist;
+		return this.title + " by " + this.getArtist();
 	}
 	
 	
