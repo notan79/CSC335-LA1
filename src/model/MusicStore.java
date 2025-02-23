@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.Year;
 
 
 public class MusicStore extends StoreFront {
@@ -28,7 +29,7 @@ public class MusicStore extends StoreFront {
 	// TODO: Cameron Implement. Extract all the albums from the albums.txt file.
 	private ArrayList<String> parseMainFile() throws FileNotFoundException {
 		ArrayList<String> temp = new ArrayList<>();
-		String fname = "albums.txt";
+		String fname = "albums/albums.txt";
 		
 		Scanner scanner = new Scanner(new File(fname));	
 
@@ -43,16 +44,38 @@ public class MusicStore extends StoreFront {
 	}
 	
 	// TODO: Cameron Implement. For each album, add all the songs from its respective file. 
-	private ArrayList<Album> parseAlbums(ArrayList<String> titles) {
+	private ArrayList<Album> parseAlbums(ArrayList<String> titles) throws FileNotFoundException {
 		ArrayList<Album> temp = new ArrayList<Album>();
+
+		for (int i = 0; i < titles.size(); i++) {
+			Scanner scanner = new Scanner(new File (titles.get(i)));
+			boolean flag = true; 
 		
+			while (scanner.hasNext()) {
+				String tempString = scanner.nextLine();
+				if (flag) { 
+					String[] line = tempString.split(",");
+					String albumName = line[0];
+					String artist = line[1];
+					String genre = line[2];
+					String year = line[3];
+					temp.add(new Album(albumName, artist, genre, Year.parse(year)));
+					flag = false;
+				} else {
+					Song s = new Song(tempString, temp.get(temp.size() - 1));
+					// is this gigachad way? ↓↓↓
+					temp.get(temp.size() - 1).addSong(s);
+					super.addSong(s);
+					// this gets the Album that was created in the if statement
+				}
+			}
+		}
 		return temp;
 	}
 	
 	
-	
 	public String getFileNameFormat(String title, String artist) {
 		// moved method from album, 
-		return title + "_" + artist + ".txt"; 
+		return "albums/" + title + "_" + artist + ".txt"; 
 	}
 }
