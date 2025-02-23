@@ -59,9 +59,6 @@ public class Album {
 		return this.year;
 	}
 	
-	public String getFileNameFormat() {
-		return this.albumName + "_" + this.artist + ".txt"; 
-	}
 	
 	public ArrayList<Song> getSongs(){
 		ArrayList<Song> temp = new ArrayList<>();
