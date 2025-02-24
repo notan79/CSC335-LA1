@@ -79,6 +79,21 @@ public class Album {
 	}
 	@Override
 	public String toString() {
-		return this.albumName + "," + this.artist + "," + this.genre + "," + this.year;
+		StringBuilder sBuilder = new StringBuilder();
+		sBuilder.append(this.albumName);
+		sBuilder.append(" by ");
+		sBuilder.append(this.artist);
+		sBuilder.append(". Genre: ");
+		sBuilder.append(this.genre);
+		sBuilder.append(". Year: ");
+		sBuilder.append(this.year.toString());
+		sBuilder.append(".\n");
+		for(Song song : this.songs) {
+			sBuilder.append("  - ");
+			sBuilder.append(song.getTitle());
+			sBuilder.append("\n");
+		}
+
+		return sBuilder.toString();
 	}
 }

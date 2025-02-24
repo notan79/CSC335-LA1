@@ -46,10 +46,4 @@ public class Playlist {
 			}		
 			return tempPlaylist;
 		}
-	
-	
-	
-	
-
-	
 }
