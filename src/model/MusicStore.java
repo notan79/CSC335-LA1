@@ -46,6 +46,7 @@ public class MusicStore extends StoreFront {
 	// TODO: Cameron Implement. For each album, add all the songs from its respective file. 
 	private ArrayList<Album> parseAlbums(ArrayList<String> titles) throws FileNotFoundException {
 		ArrayList<Album> temp = new ArrayList<Album>();
+		ArrayList<Song> songs = new ArrayList<>();
 
 		for (int i = 0; i < titles.size(); i++) {
 			Scanner scanner = new Scanner(new File (titles.get(i)));
@@ -63,12 +64,19 @@ public class MusicStore extends StoreFront {
 					flag = false;
 				} else {
 					Song s = new Song(tempString, temp.get(temp.size() - 1));
+					songs.add(s); 
 					// is this gigachad way? ↓↓↓
 					temp.get(temp.size() - 1).addSong(s);
-					super.addSong(s);
 					// this gets the Album that was created in the if statement
 				}
 			}
+			
+			// Each song needs the FINISHED album before being added to instance variables
+			for(Song song : songs) {
+				int index = temp.indexOf(song.getAlbum());
+				super.addSong(new Song(song.getTitle(), temp.get(index)));
+			}
+			
 		}
 		return temp;
 	}

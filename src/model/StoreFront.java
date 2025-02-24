@@ -63,7 +63,7 @@ public class StoreFront {
 	private ArrayList<Song> findSongsComparator(Song inp, Comparator<Song> c){
 		ArrayList<Song> temp = new ArrayList<>();
 		for(Song song : songList) {
-			if(c.compare(song, inp) == 0) temp.add(new Song(song));
+			if(c.compare(song, inp) == 0 && !temp.contains(song)) temp.add(new Song(song));
 		}
 		return temp;
 	}
@@ -71,7 +71,8 @@ public class StoreFront {
 	private ArrayList<Album> findAlbumsComparator(Album inp, Comparator<Album> c){
 		ArrayList<Album> temp = new ArrayList<>();
 		for(Song song : songList) {
-			if(c.compare(song.getAlbum(), inp) == 0) temp.add(new Album(song.getAlbum()));
+			if(c.compare(song.getAlbum(), inp) == 0 && !temp.contains(song.getAlbum())) 
+				temp.add(new Album(song.getAlbum()));
 		}
 		return temp;
 	}
