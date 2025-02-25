@@ -5,6 +5,8 @@ import java.util.Collections;
 
 public class LibraryModel extends StoreFront {
 
+	private ArrayList<Playlist> allPlaylists = new ArrayList<Playlist>();
+	
 	public LibraryModel() {
 		super();
 	}
@@ -38,22 +40,82 @@ public class LibraryModel extends StoreFront {
 	// TODO: Cameron implement this.
 	public ArrayList<String> getSongsFromPlaylist(String playlistName) {
 		ArrayList<String> temp = new ArrayList<>();
+		Playlist tempPlaylist = null;
+		ArrayList<Song> songs;
+		
+		for (int i = 0; i < allPlaylists.size(); i++) {
+			if (allPlaylists.get(i).getName().equals(playlistName)) {
+				tempPlaylist = allPlaylists.get(i);
+			}
+		}
+		
+		if (tempPlaylist == null) {
+			return new ArrayList<String>();
+		}
+	
+		songs = tempPlaylist.getPlaylist();
+		
+		for (int i = 0; i < songs.size(); i++) {
+			temp.add(songs.get(i).toString());
+		}
+	
 		return temp;
 	}
 
 	// TODO: Cameron implement this
-	public void createPlaylist(String name) {
-
+	public void createPlaylist(String playlistName) {
+		Playlist temp = new Playlist(playlistName);
+		allPlaylists.add(temp);
 	}
 
 	// TODO: Cameron implement this
-	public void addSongToPlaylist(String name, String song) {
-
+	public boolean addSongToPlaylist(String playlistName, String title, String artist) {
+		ArrayList<Song> songs = super.getSongList();
+		Playlist tempPlaylist = null;
+		boolean flag = false;
+		
+		// gets the proper playlist
+		for (int j = 0; j < allPlaylists.size(); j++) {
+			if (allPlaylists.get(j).getName().equals(playlistName)) {
+				tempPlaylist = allPlaylists.get(j);
+			}
+		}
+		if (tempPlaylist == null) {
+			return false;
+		}
+		
+		// adds the proper playlist
+		for (int i = 0; i < songs.size(); i++) {
+			if (songs.get(i).getTitle().equals(title) && songs.get(i).getArtist().equals(artist)) {
+				tempPlaylist.addSong(new Song(songs.get(i)));
+				flag = true;
+			}
+		}	
+		return flag;
 	}
 
 	// TODO: Cameron implement this
-	public void removeSongFromPlaylist(String name, String song) {
-
+	public boolean removeSongFromPlaylist(String playlistName, String title, String artist) {
+		ArrayList<Song> songs = super.getSongList();
+		Playlist tempPlaylist = null;
+		
+		// gets the proper playlist
+		for (int j = 0; j < allPlaylists.size(); j++) {
+			if (allPlaylists.get(j).getName().equals(playlistName)) {
+				tempPlaylist = allPlaylists.get(j);
+			}
+		}
+		if (tempPlaylist == null) {
+			return false;
+		}
+		
+		// removes the song from the playlist
+		for (int i = 0; i < songs.size(); i++) {
+			if (songs.get(i).getTitle().equals(title) && songs.get(i).getArtist().equals(artist)) {
+				tempPlaylist.removeSong(new Song(songs.get(i)));
+			}
+		}	
+		return true;
 	}
 
 	public ArrayList<String> getFavorites() {
