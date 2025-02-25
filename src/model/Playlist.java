@@ -52,7 +52,7 @@ public class Playlist {
 		for(Song song : this.playlistSongs) {
 			stringBuilder.append("\n  -");
 			stringBuilder.append(song);
-			stringBuilder.append("\n");
+			// stringBuilder.append("\n");
 		}
 		
 		return stringBuilder.toString();

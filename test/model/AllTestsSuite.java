@@ -4,7 +4,7 @@ import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
-@SelectClasses({ AlbumTest.class, SongTest.class})
+@SelectClasses({ AlbumTest.class, SongTest.class, MusicStoreTest.class, PlaylistTest.class})
 public class AllTestsSuite {
 	
 }
