@@ -16,6 +16,7 @@ public final class Song {
 	public Song(Song song) {
 		this.title = song.title;
 		this.rating = song.rating;
+		this.isFavorite = song.isFavorite;
 		this.album = new Album(song.album);
 	}
 
@@ -60,8 +61,9 @@ public final class Song {
 	}
 
 	public void setRating(Rating rate) {
-		if (rate == Rating.FIVE)
+		if (rate == Rating.FIVE) {
 			this.setFavorite();
+		}
 		this.rating = rate;
 	}
 

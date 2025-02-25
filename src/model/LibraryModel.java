@@ -11,28 +11,21 @@ public class LibraryModel extends StoreFront {
 		super();
 	}
 
-	public void setSongToFavorite(String title) {
-		ArrayList<Song> arr = super.getSongList();
-		for (Song song : arr) {
-			if (song.getTitle().equals(title))
-				song.setFavorite();
-		}
+	public void setSongToFavorite(Song song) {
+		super.setFavorite(song);
 	}
 
-	public void rateSong(String title, Rating rate) {
-		ArrayList<Song> arr = super.getSongList();
-		for (Song song : arr) {
-			if (song.getTitle().equals(title)) {
-				song.setRating(rate);
-			}
-		}
+	public void rateSong(Song song, Rating rate) {
+		super.setRating(song, rate);
 	}
 
 	// TODO: Cameron, implement this after Playlist class is made. Return a string
 	// of playlist names.
 	public ArrayList<String> getPlaylists() {
 		ArrayList<String> temp = new ArrayList<>();
-
+		for(Playlist playlist : this.allPlaylists)
+			temp.add(playlist.toString());
+		
 		Collections.sort(temp);
 		return temp;
 	}
@@ -121,10 +114,9 @@ public class LibraryModel extends StoreFront {
 	public ArrayList<String> getFavorites() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Song> arr = super.getSongList();
-
 		for (Song song : arr) {
 			if (song.isFavorite()) {
-				temp.add(song.getAlbum().getAlbumName());
+				temp.add(song.toString());
 			}
 		}
 
