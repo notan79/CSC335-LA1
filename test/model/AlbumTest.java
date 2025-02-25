@@ -18,7 +18,6 @@ class AlbumTest {
 
 		assertFalse(a0 == a1);
 		assertTrue(a0.equals(a1));
-		System.out.println(a0.toString());
 		assertEquals(a0.toString(), "Title by Artist. Genre: Genre. Year: 2021.\n");
 		assertEquals(a1.toString(), "Title by Artist. Genre: Genre. Year: 2021.\n");
 	}
@@ -41,7 +40,6 @@ class AlbumTest {
 		assertFalse(s0 == arr.get(0));
 		assertFalse(s1 == arr.get(1));
 		
-		System.out.println(a0);
 		assertEquals(a0.toString(), "Title by Artist. Genre: Genre. Year: 2021.\n  - Song0\n  - Song1\n");
 	}
 	

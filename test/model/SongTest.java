@@ -55,7 +55,7 @@ class SongTest {
 	@Test 
 	void testGetAlbum() {
 		Song s1 = new Song("Title1", a0);
-		assertEquals(s1.getAlbum().toString(), "Title,Artist,Genre,2021");
+		assertEquals(s1.getAlbum().toString(), "Title by Artist. Genre: Genre. Year: 2021.\n");
 		assertEquals(s1.getAlbum(), s0.getAlbum());
 		assertFalse(s0.getAlbum() == s1.getAlbum());
 	}
