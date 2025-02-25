@@ -22,7 +22,6 @@ public class UI {
 		lib = new LibraryModel();
 		
 		mainPrompt();
-		scanner.close();
 	}
 
 	private static void mainPrompt() {
@@ -35,8 +34,11 @@ public class UI {
 			searchPrompt(ms);
 		else if (inpString.equals("2"))
 			libraryPrompt();
-		else
+		else {
 			System.out.println("\nEnding program.");
+			scanner.close();
+			System.exit(0);
+		}
 	}
 
 	private static void searchPrompt(StoreFront s) {
@@ -113,7 +115,7 @@ public class UI {
 
 	// TODO: Nate implement
 	private static void libraryPrompt() {
-		System.out.printf("\nYou are in user library. Choose an action (1-5):\n" + "1. Search for songs or albums.\n"
+		System.out.printf("\nYou are in user library. Choose an action (1-8):\n" + "1. Search for songs or albums.\n"
 				+ "2. Add song or album to library.\n" + "3. Rate a song.\n" + "4. Favorite a song.\n"
 				+ "5. Get information for library.\n" + "6. Create playlist.\n"
 				+ "7. Add or remove song from playlist.\n" + "8. Exit User Library.\n\n" + "Enter action: ");
@@ -220,9 +222,8 @@ public class UI {
 
 		System.out.println("Valid ratings are 1-5. Anything else will be interpreted as no rating.");
 		System.out.print("\nEnter song title to rate: ");
-		System.out.println("\nValid ratings are 1-5. Anything else will be interpreted as no rating.");
 		inpString = scanner.nextLine().strip();
-		ArrayList<Song> arr = ms.findSongByTitle(inpString);
+		ArrayList<Song> arr = lib.findSongByTitle(inpString);
 		if (arr.size() == 0) {
 			System.out.printf("No songs in library with title: %s", inpString);
 		} else {
@@ -230,17 +231,17 @@ public class UI {
 				System.out.printf("Rate %s: ", song);
 				inpString = scanner.nextLine().strip();
 				if (inpString.equals("1"))
-					lib.rateSong(song.getTitle(), Rating.ONE);
+					lib.rateSong(song, Rating.ONE);
 				else if (inpString.equals("2"))
-					lib.rateSong(song.getTitle(), Rating.TWO);
+					lib.rateSong(song, Rating.TWO);
 				else if (inpString.equals("3"))
-					lib.rateSong(song.getTitle(), Rating.THREE);
+					lib.rateSong(song, Rating.THREE);
 				else if (inpString.equals("4"))
-					lib.rateSong(song.getTitle(), Rating.FOUR);
+					lib.rateSong(song, Rating.FOUR);
 				else if (inpString.equals("5"))
-					lib.rateSong(song.getTitle(), Rating.FIVE);
+					lib.rateSong(song, Rating.FIVE);
 				else
-					lib.rateSong(song.getTitle(), Rating.NONE);
+					lib.rateSong(song, Rating.NONE);
 			}
 		}
 	}
@@ -249,14 +250,15 @@ public class UI {
 		String inpString;
 		System.out.print("\nEnter song title to favorite: ");
 		inpString = scanner.nextLine().strip();
-		ArrayList<Song> arr = ms.findSongByTitle(inpString);
+		ArrayList<Song> arr = lib.findSongByTitle(inpString);
 		if (arr.size() == 0) {
-			System.out.printf("No songs in library with title: %s", inpString);
+			System.out.printf("No songs in library with title: %s\n", inpString);
 		} else {
 			for (Song song : arr) {
 				System.out.printf("Favorite %s? (Enter Y for yes): ", song);
+				inpString = scanner.nextLine().strip();
 				if (inpString.equals("Y"))
-					lib.setSongToFavorite(song.getTitle());
+					lib.setSongToFavorite(song);
 			}
 		}
 	}
@@ -279,16 +281,20 @@ public class UI {
 
 		System.out.print("Choose playlist: ");
 		String playlist = scanner.nextLine().strip();
-		System.out.printf("\n:\n" + "1. Add song.\n" + "2. Remove song.\n\n" + "Enter action: ");
+		System.out.printf("\n" + "1. Add song.\n" + "2. Remove song.\n\n" + "Enter action: ");
 		inpString = scanner.nextLine().strip();
 		if (inpString.equals("1")) {
-			System.out.print("Choose song to add: ");
+			System.out.print("Choose song title to add: ");
 			inpString = scanner.nextLine().strip();
-			lib.addSongToPlaylist(playlist, inpString);
+			System.out.print("Choose artist for song: ");
+			if(!lib.addSongToPlaylist(playlist, inpString, scanner.nextLine().strip())) {
+				System.out.printf("Unable to add %s to playlist: song not in library.\n", inpString);
+			}
 		} else if (inpString.equals("2")) {
 			System.out.print("Choose song to remove: ");
 			inpString = scanner.nextLine().strip();
-			lib.removeSongFromPlaylist(playlist, inpString);
+			System.out.print("Choose artist for song remove: ");
+			lib.removeSongFromPlaylist(playlist, inpString, scanner.nextLine().strip());
 		} else
 			System.out.println("Invalid input.");
 	}

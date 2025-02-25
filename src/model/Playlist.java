@@ -50,7 +50,7 @@ public class Playlist {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(this.name);
 		for(Song song : this.playlistSongs) {
-			stringBuilder.append("  -");
+			stringBuilder.append("\n  -");
 			stringBuilder.append(song);
 			stringBuilder.append("\n");
 		}

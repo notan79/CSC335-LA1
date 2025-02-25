@@ -9,7 +9,8 @@ public class StoreFront {
 	private ArrayList<Song> songList = new ArrayList<>();
 
 	public void addSong(Song song) {
-		songList.add(new Song(song));
+		if(!songList.contains(song))
+			songList.add(new Song(song));
 	}
 
 	public ArrayList<Song> getSongList() {
@@ -43,7 +44,24 @@ public class StoreFront {
 		}
 		return new ArrayList<>(temp);
 	}
-
+	
+	public void setRating(Song song, Rating rate) {
+		for(Song s : this.songList) {
+			if(song.equals(s)){
+				if(rate == Rating.FIVE)
+					s.setFavorite();
+				s.setRating(rate);
+			}
+		}
+	}
+	
+	public void setFavorite(Song song) {
+		for(Song s : this.songList) {
+			if(s.equals(song))
+				s.setFavorite();
+		}
+	}
+	
 	public ArrayList<Song> findSongByTitle(String title) {
 		return this.findSongsComparator(Song.fromTitle(title), new Compare.CompareSongByTitle());
 	}

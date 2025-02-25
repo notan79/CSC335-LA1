@@ -8,9 +8,9 @@ import java.time.Year;
 import org.junit.jupiter.api.Test;
 
 class AlbumTest {
-	private static Album a0 = new Album("Title", "Artist", "Genre", Year.parse("2021"));
-	private static Song s0 = new Song("Song0", a0);
-	private static Song s1 = new Song("Song1", a0);
+	private Album a0 = new Album("Title", "Artist", "Genre", Year.parse("2021"));
+	private Song s0 = new Song("Song0", a0);
+	private Song s1 = new Song("Song1", a0);
 
 	@Test
 	void testConstructors() {
@@ -18,8 +18,9 @@ class AlbumTest {
 
 		assertFalse(a0 == a1);
 		assertTrue(a0.equals(a1));
-		assertEquals(a0.toString(), "Title,Artist,Genre,2021");
-		assertEquals(a1.toString(), "Title,Artist,Genre,2021");
+		System.out.println(a0.toString());
+		assertEquals(a0.toString(), "Title by Artist. Genre: Genre. Year: 2021.\n");
+		assertEquals(a1.toString(), "Title by Artist. Genre: Genre. Year: 2021.\n");
 	}
 	
 	@Test
@@ -39,6 +40,9 @@ class AlbumTest {
 		assertEquals(s1, arr.get(1));
 		assertFalse(s0 == arr.get(0));
 		assertFalse(s1 == arr.get(1));
+		
+		System.out.println(a0);
+		assertEquals(a0.toString(), "Title by Artist. Genre: Genre. Year: 2021.\n  - Song0\n  - Song1\n");
 	}
 	
 	@Test
@@ -73,7 +77,6 @@ class AlbumTest {
 		assertNotEquals(a0, a3);
 		assertNotEquals(a0, a4);
 		assertNotEquals(a0, a5);
-
 	}
 
 }
