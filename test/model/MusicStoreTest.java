@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import model.library.MusicStore;
+
 class MusicStoreTest {
 	
 	private MusicStore mStore = new MusicStore();
