@@ -7,6 +7,28 @@ import model.Playlist;
 import model.Rating;
 import model.Song;
 
+/*
+ * 	Author:		Nathan Crutchfield
+ * 
+ * 	Purpose: 	Sub class of StoreFront to represent the user library to
+ * 				store songs, create playlists, rate, etc.
+ * 
+ * 	Instance Variables: 
+ * 			- songList: 	protected ArrayList inherited from StoreFront
+ * 			- allPlaylists: private ArrayList of Playlist objects
+ * 
+ * 	Methods: 
+ * 			- public void setRating(Song, Rating)
+ * 			- public void setFavorite(Song)
+ * 			- public ArrayList<String> getPlaylists()
+ * 			- public ArrayList<String> getPlaylistsFormatted()
+ * 			- public ArrayList<String> getSongsFromPlaylist(String)
+ * 			- public boolean createPlaylist(String)
+ * 			- public boolean addSongToPlaylist(String, String, String)
+ * 			- public boolean removeSongFromPlaylist(String, String, String)
+ * 			- public ArrayList<String> getFavorites()
+ * 	
+ */
 public class LibraryModel extends StoreFront {
 
 	private ArrayList<Playlist> allPlaylists = new ArrayList<Playlist>();
@@ -15,6 +37,7 @@ public class LibraryModel extends StoreFront {
 		super();
 	}
 
+	// Setters
 	public void setRating(Song song, Rating rate) {
 		for(Song s : this.songList) {
 			if(song.equals(s)){
@@ -32,8 +55,7 @@ public class LibraryModel extends StoreFront {
 		}
 	}
 
-	// TODO: Cameron, implement this after Playlist class is made. Return a string
-	// of playlist names.
+	// Getters
 	public ArrayList<String> getPlaylists() {
 		ArrayList<String> temp = new ArrayList<>();
 		for(Playlist playlist : this.allPlaylists)
@@ -52,7 +74,6 @@ public class LibraryModel extends StoreFront {
 		return temp;
 	}
 
-	// TODO: Cameron implement this.
 	public ArrayList<String> getSongsFromPlaylist(String playlistName) {
 		ArrayList<String> temp = new ArrayList<>();
 		Playlist tempPlaylist = null;
@@ -77,7 +98,7 @@ public class LibraryModel extends StoreFront {
 		return temp;
 	}
 
-	// TODO: Cameron implement this
+	// Creates a new Playlist
 	public boolean createPlaylist(String playlistName) {
 		for(Playlist playlist : this.allPlaylists) {
 			if(playlist.getName().equals(playlistName))
@@ -88,7 +109,7 @@ public class LibraryModel extends StoreFront {
 		return true;
 	}
 
-	// TODO: Cameron implement this
+	// Adds a song to a specified playlist
 	public boolean addSongToPlaylist(String playlistName, String title, String artist) {
 		ArrayList<Song> songs = this.songList;
 		Playlist tempPlaylist = null;
@@ -114,7 +135,7 @@ public class LibraryModel extends StoreFront {
 		return flag;
 	}
 
-	// TODO: Cameron implement this
+	// Removes a song from a specified playlist
 	public boolean removeSongFromPlaylist(String playlistName, String title, String artist) {
 		ArrayList<Song> songs = this.songList;
 		Playlist tempPlaylist = null;
@@ -138,6 +159,7 @@ public class LibraryModel extends StoreFront {
 		return true;
 	}
 
+	// Getter
 	public ArrayList<String> getFavorites() {
 		ArrayList<String> temp = new ArrayList<>();
 		ArrayList<Song> arr = this.songList;
