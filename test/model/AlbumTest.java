@@ -46,7 +46,6 @@ class AlbumTest {
 	@Test
 	void testStaticMethods() {
 		Album a1 = Album.fromAlbumName("NEW ALBUM");
-		System.out.println(a1.getAlbumName());
 		assertEquals(a1.getAlbumName(), "NEW ALBUM");
 		assertEquals(a1.getArtist(), "");
 		assertEquals(a1.getGenre(), "");
