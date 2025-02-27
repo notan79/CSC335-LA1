@@ -30,7 +30,7 @@ public final class Song {
 
 	public static Song fromAlbum(Album album) {
 		
-		return new Song(null, new Album(album));
+		return new Song("", new Album(album));
 	}
 
 	// Getters

@@ -36,7 +36,7 @@ class SongTest {
 		
 		Song s2 = Song.fromAlbum(a0);
 		assertEquals(s2.getArtist(), "Artist");
-		assertNull(s2.getTitle());
+		assertEquals(s2.getTitle(), "");
 		assertNotEquals(s0, s2);
 	}
 	
