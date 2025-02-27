@@ -19,7 +19,7 @@ import java.util.Comparator;
  * 	songs: ArrayList<Song>, arraylist of songs that stores all songs from the album
  *
  * 
- * Method Signature: 
+ * Methods: 
  * 	public static Album fromAlbumName(String): returns the albums from the name
  * 	public static Album fromArtist(String): returns the albums from the artist
  * 	public void addSong(Song): adds the song from the parameter to the list of songs
@@ -39,16 +39,24 @@ public class Album {
 	private final Year year;
 	private final ArrayList<Song> songs = new ArrayList<>();
 
+	/*
+	 * 	Constructor for when you have everything for the album 
+	 * 
+	 * 	@pre: albumName != null && artist != null && genre != null && year != null
+	 */
 	public Album(String albumName, String artist, String genre, Year year) {
-		// constructor for when you have everything for the album 
 		this.albumName = albumName;
 		this.artist = artist;
 		this.genre = genre;
 		this.year = year;
 	}
 
+	/*
+	 * 	Copy constructor
+	 * 	
+	 * 	@pre: album != null
+	 */
 	public Album(Album album) {
-		// constructor when you have just the album name
 		this.albumName = album.albumName;
 		this.artist = album.artist;
 		this.genre = album.genre;
@@ -59,6 +67,7 @@ public class Album {
 		}
 	}
 	
+	// These methods create a temporary album either from title or from artist
 	public static Album fromAlbumName(String title) {
 		return new Album(title, "", "", Year.parse("0"));
 	}

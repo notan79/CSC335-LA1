@@ -11,7 +11,7 @@ package model;
  * 	album: album that the Song is from
  * 	isFavorite: if the Song is a favorite
  * 
- * Method Signature:
+ * Methods:
  * 
  * public static Song fromTitle(String): returns a song from the title
  * public static Song fromAlbum(Album): returns a song from the album
@@ -31,12 +31,20 @@ public final class Song {
 	private Album album;
 	private boolean isFavorite = false;
 
+	/*
+	 * 	Basic Song constructor
+	 * 	@pre: title != null && Album != null
+	 */
 	public Song(String title, Album album) {
 		this.title = title;
 		this.rating = Rating.NONE;
 		this.album = new Album(album);
 	}
 
+	/*
+	 * 	Copy constructor
+	 * 	@pre: song != null
+	 */
 	public Song(Song song) {
 		this.title = song.title;
 		this.rating = song.rating;
@@ -44,18 +52,21 @@ public final class Song {
 		this.album = new Album(song.album);
 	}
 
+	/*
+	 * 	Temporary constructor
+	 * 	@pre: title != null
+	 */
 	private Song(String title) {
 		this.title = title;
 	}
 
+	// These methods create a temporary song from a given title or album.
 	public static Song fromTitle(String title) {
-		// returns the song from the title
 		return new Song(title);
 	}
 
 	public static Song fromAlbum(Album album) {
-		// returns the song from the album
-			return new Song("", new Album(album));
+		return new Song("", new Album(album));
 	}
 
 	// Getters

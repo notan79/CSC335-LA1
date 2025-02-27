@@ -3,7 +3,7 @@ package model;
 import java.util.Comparator;
 
 /*
- * Class to make comparing Songs and Albums by title and artist less redundant
+ * 	Utility class to make comparing Songs and Albums by title and artist less redundant
  */
 public class Compare {
 
