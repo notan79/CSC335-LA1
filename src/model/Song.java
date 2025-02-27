@@ -128,8 +128,6 @@ public final class Song {
 
 	@Override
 	public String toString() {
-		if(this.album == null)
-			return this.title;
 		return this.title + " by " + this.getArtist();
 	}
 
