@@ -12,27 +12,25 @@ import java.time.Year;
 
 public class MusicStore extends StoreFront {
 
-	public MusicStore() {
+	public MusicStore(String fname) {
 		super();
-		this.parseFiles();
+		this.parseFiles(fname);
 	}
 
 	// TODO: Cameron Implement
-	private void parseFiles() {
+	private void parseFiles(String fname) {
 		try {
-			this.parseAlbums(this.parseMainFile());
+			this.parseAlbums(this.parseMainFile(fname));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			System.out.println("File not found");
-			System.exit(1);
+			return;
 		}
 	}
 
 	// TODO: Cameron Implement. Extract all the albums from the albums.txt file.
-	private ArrayList<String> parseMainFile() throws FileNotFoundException {
+	private ArrayList<String> parseMainFile(String fname) throws FileNotFoundException {
 		ArrayList<String> temp = new ArrayList<>();
-		String fname = "albums/albums.txt";
 
 		Scanner scanner = new Scanner(new File(fname));
 
