@@ -1,7 +1,11 @@
-package model;
+package model.library;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import model.Playlist;
+import model.Rating;
+import model.Song;
 
 public class LibraryModel extends StoreFront {
 
@@ -11,12 +15,21 @@ public class LibraryModel extends StoreFront {
 		super();
 	}
 
-	public void setSongToFavorite(Song song) {
-		super.setFavorite(song);
+	public void setRating(Song song, Rating rate) {
+		for(Song s : this.songList) {
+			if(song.equals(s)){
+				if(rate == Rating.FIVE)
+					s.setFavorite();
+				s.setRating(rate);
+			}
+		}
 	}
-
-	public void rateSong(Song song, Rating rate) {
-		super.setRating(song, rate);
+	
+	public void setFavorite(Song song) {
+		for(Song s : this.songList) {
+			if(s.equals(song))
+				s.setFavorite();
+		}
 	}
 
 	// TODO: Cameron, implement this after Playlist class is made. Return a string
@@ -56,14 +69,19 @@ public class LibraryModel extends StoreFront {
 	}
 
 	// TODO: Cameron implement this
-	public void createPlaylist(String playlistName) {
+	public boolean createPlaylist(String playlistName) {
+		for(Playlist playlist : this.allPlaylists) {
+			if(playlist.getName().equals(playlistName))
+				return false;
+		}
 		Playlist temp = new Playlist(playlistName);
 		allPlaylists.add(temp);
+		return true;
 	}
 
 	// TODO: Cameron implement this
 	public boolean addSongToPlaylist(String playlistName, String title, String artist) {
-		ArrayList<Song> songs = super.getSongList();
+		ArrayList<Song> songs = this.songList;
 		Playlist tempPlaylist = null;
 		boolean flag = false;
 		
@@ -89,7 +107,7 @@ public class LibraryModel extends StoreFront {
 
 	// TODO: Cameron implement this
 	public boolean removeSongFromPlaylist(String playlistName, String title, String artist) {
-		ArrayList<Song> songs = super.getSongList();
+		ArrayList<Song> songs = this.songList;
 		Playlist tempPlaylist = null;
 		
 		// gets the proper playlist
@@ -113,7 +131,7 @@ public class LibraryModel extends StoreFront {
 
 	public ArrayList<String> getFavorites() {
 		ArrayList<String> temp = new ArrayList<>();
-		ArrayList<Song> arr = super.getSongList();
+		ArrayList<Song> arr = this.songList;
 		for (Song song : arr) {
 			if (song.isFavorite()) {
 				temp.add(song.toString());

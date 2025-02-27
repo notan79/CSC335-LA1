@@ -1,9 +1,13 @@
-package model;
+package model.library;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import model.Album;
+import model.Song;
+
 import java.time.Year;
 
 public class MusicStore extends StoreFront {

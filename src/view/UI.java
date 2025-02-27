@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Album;
-import model.LibraryModel;
-import model.MusicStore;
 import model.Rating;
 import model.Song;
-import model.StoreFront;
+import model.library.LibraryModel;
+import model.library.MusicStore;
+import model.library.StoreFront;
 
 public class UI {
 	private static Scanner scanner;
@@ -231,17 +231,17 @@ public class UI {
 				System.out.printf("Rate %s: ", song);
 				inpString = scanner.nextLine().strip();
 				if (inpString.equals("1"))
-					lib.rateSong(song, Rating.ONE);
+					lib.setRating(song, Rating.ONE);
 				else if (inpString.equals("2"))
-					lib.rateSong(song, Rating.TWO);
+					lib.setRating(song, Rating.TWO);
 				else if (inpString.equals("3"))
-					lib.rateSong(song, Rating.THREE);
+					lib.setRating(song, Rating.THREE);
 				else if (inpString.equals("4"))
-					lib.rateSong(song, Rating.FOUR);
+					lib.setRating(song, Rating.FOUR);
 				else if (inpString.equals("5"))
-					lib.rateSong(song, Rating.FIVE);
+					lib.setRating(song, Rating.FIVE);
 				else
-					lib.rateSong(song, Rating.NONE);
+					lib.setRating(song, Rating.NONE);
 			}
 		}
 	}
@@ -258,7 +258,7 @@ public class UI {
 				System.out.printf("Favorite %s? (Enter Y for yes): ", song);
 				inpString = scanner.nextLine().strip();
 				if (inpString.equals("Y"))
-					lib.setSongToFavorite(song);
+					lib.setFavorite(song);
 			}
 		}
 	}

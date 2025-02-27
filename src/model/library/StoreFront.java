@@ -1,12 +1,20 @@
-package model;
+package model.library;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 
+import model.Album;
+import model.Compare;
+import model.Song;
+//import model.Compare.CompareAlbumByArtist;
+//import model.Compare.CompareAlbumByTitle;
+//import model.Compare.CompareSongByArtist;
+//import model.Compare.CompareSongByTitle;
+
 public class StoreFront {
 
-	private ArrayList<Song> songList = new ArrayList<>();
+	protected final ArrayList<Song> songList = new ArrayList<>();
 
 	public void addSong(Song song) {
 		if(!songList.contains(song))
@@ -45,23 +53,6 @@ public class StoreFront {
 		return new ArrayList<>(temp);
 	}
 	
-	public void setRating(Song song, Rating rate) {
-		for(Song s : this.songList) {
-			if(song.equals(s)){
-				if(rate == Rating.FIVE)
-					s.setFavorite();
-				s.setRating(rate);
-			}
-		}
-	}
-	
-	public void setFavorite(Song song) {
-		for(Song s : this.songList) {
-			if(s.equals(song))
-				s.setFavorite();
-		}
-	}
-	
 	public ArrayList<Song> findSongByTitle(String title) {
 		return this.findSongsComparator(Song.fromTitle(title), new Compare.CompareSongByTitle());
 	}
@@ -81,7 +72,7 @@ public class StoreFront {
 	private ArrayList<Song> findSongsComparator(Song inp, Comparator<Song> c) {
 		ArrayList<Song> temp = new ArrayList<>();
 		for (Song song : songList) {
-			if (c.compare(song, inp) == 0 && !temp.contains(song))
+			if (c.compare(song, inp) == 0)
 				temp.add(new Song(song));
 		}
 		return temp;
