@@ -2,9 +2,24 @@ package model;
 
 import java.util.ArrayList;
 
-// TODO: Cameron, implement this class. Needs a name for the playlist and a list of songs.
-// Client needs to be able to see all songs in a playlist, add, remove. Need to maintain the
-// order they were added in. 
+/* Author(s): Cameron Liu and Nathan Crutchfield
+ * 
+ * Purpose: The purpose of this class is to represent a playlist. It does this by having a name, and a 
+ * playlist of songs that are created in order to show the playlist itself. 
+ * 
+ * Instance Variables: 
+ * 	name: the name of the playlist
+ * 	playlistSongs: the ArrayList of songs that represents a playlist.
+ * 
+ * Method Signature:
+ * 	public void addSong(Song): adds a song to the ArrayList of songs (playlistSongs)
+ * 	public void removeSong(Song): removes a song from the ArrayList of songs (playlistSongs)
+ * 	public String getName(): returns the name of the ArrayList of songs (playlistSongs)
+ * 	public ArrayList<Song> getPlaylist(): returns the ArrayList of songs (playlistSongs)  
+ * 
+ */
+
+
 public class Playlist {
 
 	private final String name;
@@ -15,11 +30,13 @@ public class Playlist {
 	}
 
 	public void addSong(Song song) {
+		// adds a song to the playlist
 		Song tempSong = new Song(song);
 		playlistSongs.add(tempSong);
 	}
 
 	public void removeSong(Song song) {
+		// removes a song from the playlist
 		for (int i = 0; i < playlistSongs.size(); i++) {
 			if (playlistSongs.get(i).equals(song)) {
 				// if song in the constructor has the same title and artist, remove it
@@ -30,10 +47,12 @@ public class Playlist {
 
 	// getters
 	public String getName() {
+		// gets the name of the playlist
 		return this.name;
 	}
 
 	public ArrayList<Song> getPlaylist() {
+		// gets the playlist
 		ArrayList<Song> tempPlaylist = new ArrayList<Song>();
 		for (int i = 0; i < playlistSongs.size(); i++) {
 			// iterates through original playlist, creating copy of each song and adding it
