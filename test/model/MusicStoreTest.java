@@ -10,7 +10,7 @@ import model.library.MusicStore;
 
 class MusicStoreTest {
 	
-	private MusicStore mStore = new MusicStore();
+	private MusicStore mStore = new MusicStore("albums/albums.txt");
 
 	@Test
 	void testConstructor() {
@@ -38,5 +38,8 @@ class MusicStoreTest {
 			assertNotEquals(arrayList.indexOf(string), -1);
 		}
 		assertEquals(arrayList.size(), arr2.length);
+		
+		MusicStore ms = new MusicStore("albums/otherFile.txt");
+		assertEquals(ms.getSongList().size(), 0);
 	}
 }

@@ -18,7 +18,7 @@ public class UI {
 	public static void run() {
 		scanner = new Scanner(System.in);
 
-		ms = new MusicStore();
+		ms = new MusicStore("albums/albums.txt");
 		lib = new LibraryModel();
 		
 		mainPrompt();

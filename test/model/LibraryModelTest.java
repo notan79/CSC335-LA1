@@ -175,5 +175,15 @@ class LibraryModelTest {
 		assertEquals(lm.findAlbumByArtist(s1.getAlbum().getArtist()).size(), 1);
 		assertEquals(lm.findAlbumByArtist(s1.getAlbum().getArtist()).get(0), s1.getAlbum());
 	}
+	
+	@Test 
+	void testFormattedPlaylist() {
+		lm.addSong(s0);
+		lm.addSong(s1);
+		lm.createPlaylist("Playlist");
+		lm.addSongToPlaylist("Playlist", s0.getTitle(), s0.getAlbum().getArtist());
+		lm.addSongToPlaylist("Playlist", s1.getTitle(), s1.getAlbum().getArtist());
+		assertEquals(lm.getPlaylistsFormatted().toString(), "[Playlist\n  -Title by Artist0\n  -Title2 by Artist0]");	
+	}
 
 }
