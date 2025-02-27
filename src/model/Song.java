@@ -55,7 +55,7 @@ public final class Song {
 
 	public static Song fromAlbum(Album album) {
 		// returns the song from the album
-		return new Song(null, new Album(album));
+			return new Song("", new Album(album));
 	}
 
 	// Getters
@@ -117,6 +117,8 @@ public final class Song {
 
 	@Override
 	public String toString() {
+		if(this.album == null)
+			return this.title;
 		return this.title + " by " + this.getArtist();
 	}
 

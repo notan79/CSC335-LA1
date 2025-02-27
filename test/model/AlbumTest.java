@@ -46,16 +46,17 @@ class AlbumTest {
 	@Test
 	void testStaticMethods() {
 		Album a1 = Album.fromAlbumName("NEW ALBUM");
+		System.out.println(a1.getAlbumName());
 		assertEquals(a1.getAlbumName(), "NEW ALBUM");
-		assertNull(a1.getArtist());
-		assertNull(a1.getGenre());
-		assertNull(a1.getYear());
+		assertEquals(a1.getArtist(), "");
+		assertEquals(a1.getGenre(), "");
+		assertEquals(a1.getYear().toString(), "0");
 		
 		Album a2 = Album.fromArtist("NEW ARTIST");
 		assertEquals(a2.getArtist(), "NEW ARTIST");
-		assertNull(a2.getAlbumName());
-		assertNull(a2.getGenre());
-		assertNull(a2.getYear());
+		assertEquals(a2.getAlbumName(), "");
+		assertEquals(a2.getGenre(), "");
+		assertEquals(a2.getYear().toString(), "0");
 	}
 	
 	@Test

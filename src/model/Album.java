@@ -2,6 +2,7 @@ package model;
 
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /* Authors(s): Cameron Liu and Nathan Crutchfield
  * 
@@ -57,15 +58,13 @@ public class Album {
 			this.songs.add(new Song(s));
 		}
 	}
-
-	public static Album fromAlbumName(String albumName) {
-		// returns album from name
-		return new Album(albumName, null, null, null);
+	
+	public static Album fromAlbumName(String title) {
+		return new Album(title, "", "", Year.parse("0"));
 	}
-
-	public static Album fromArtist(String artist) {
-		// returns album from artist
-		return new Album(null, artist, null, null);
+	
+	public static Album fromArtist(String artistName) {
+		return new Album("", artistName, "", Year.parse("0"));
 	}
 
 	public void addSong(Song song) {

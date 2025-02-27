@@ -10,6 +10,22 @@ import model.Song;
 
 import java.time.Year;
 
+/*
+ * 	Author:		Cameron Liu
+ * 
+ * 	Purpose: 	Sub class of StoreFront to represent the store to pull
+ * 				songs and albums from
+ * 
+ * 	Instance Variables: 
+ * 			- songList: protected ArrayList inherited from StoreFront
+ * 
+ * 	Methods: 
+ * 			- private void parseFiles(String)
+ * 			- private ArrayList<String> parseMainFile(String)
+ * 			- private ArrayList<Album> parseAlbums(ArrayList<String>)
+ * 			- public String getFileNameFormat(String, String)
+ * 	
+ */
 public class MusicStore extends StoreFront {
 
 	public MusicStore(String fname) {
@@ -17,7 +33,7 @@ public class MusicStore extends StoreFront {
 		this.parseFiles(fname);
 	}
 
-	// TODO: Cameron Implement
+	// Method to catch FileNotFoundException
 	private void parseFiles(String fname) {
 		try {
 			this.parseAlbums(this.parseMainFile(fname));
@@ -28,7 +44,7 @@ public class MusicStore extends StoreFront {
 		}
 	}
 
-	// TODO: Cameron Implement. Extract all the albums from the albums.txt file.
+	// Extract all the album titles from the albums.txt file.
 	private ArrayList<String> parseMainFile(String fname) throws FileNotFoundException {
 		ArrayList<String> temp = new ArrayList<>();
 
@@ -45,18 +61,22 @@ public class MusicStore extends StoreFront {
 		return temp;
 	}
 
-	// TODO: Cameron Implement. For each album, add all the songs from its
-	// respective file.
+	// For each album, add all the songs from its respective file.
 	private ArrayList<Album> parseAlbums(ArrayList<String> titles) throws FileNotFoundException {
 		ArrayList<Album> temp = new ArrayList<Album>();
 		ArrayList<Song> songs = new ArrayList<>();
 
 		for (int i = 0; i < titles.size(); i++) {
+			
+			// Read in the current album file
 			Scanner scanner = new Scanner(new File(titles.get(i)));
 			boolean flag = true;
 
+			// Read all songs from the file
 			while (scanner.hasNext()) {
 				String tempString = scanner.nextLine();
+				
+				// First line
 				if (flag) {
 					String[] line = tempString.split(",");
 					String albumName = line[0];
@@ -65,12 +85,13 @@ public class MusicStore extends StoreFront {
 					String year = line[3];
 					temp.add(new Album(albumName, artist, genre, Year.parse(year)));
 					flag = false;
-				} else {
+				} 
+				// Rest of lines
+				else {
 					Song s = new Song(tempString, temp.get(temp.size() - 1));
 					songs.add(s);
 					// is this gigachad way? ↓↓↓
-					temp.get(temp.size() - 1).addSong(s);
-					// this gets the Album that was created in the if statement
+					temp.get(temp.size() - 1).addSong(s); // this gets the Album that was created in the if statement
 				}
 			}
 
@@ -79,12 +100,13 @@ public class MusicStore extends StoreFront {
 				int index = temp.indexOf(song.getAlbum());
 				super.addSong(new Song(song.getTitle(), temp.get(index)));
 			}
-
+			scanner.close();
 		}
 		return temp;
 	}
 
-	public String getFileNameFormat(String title, String artist) {
+	// Gets the formatted string for the album files
+	private String getFileNameFormat(String title, String artist) {
 		// moved method from album,
 		return "albums/" + title + "_" + artist + ".txt";
 	}
