@@ -166,7 +166,7 @@ public class UI {
 				System.out.println("- " + s);
 			}
 		} else if (inpString.equals("4")) {
-			ArrayList<String> arrayList = lib.getPlaylists();
+			ArrayList<String> arrayList = lib.getPlaylistsFormatted();
 			for (String s : arrayList) {
 				System.out.println("- " + s);
 			}
@@ -281,7 +281,18 @@ public class UI {
 
 		System.out.print("Choose playlist: ");
 		String playlist = scanner.nextLine().strip();
+		boolean flag = false;
+		ArrayList<String> playlists = lib.getPlaylists();
+		for(String p : playlists) {
+			if(playlist.equals(p)) flag = true;
+		}
+		if(!flag) {
+			System.out.printf("No playlist with name: %s.\n", playlist);
+			return;
+		}
+		
 		System.out.printf("\n" + "1. Add song.\n" + "2. Remove song.\n\n" + "Enter action: ");
+		
 		inpString = scanner.nextLine().strip();
 		if (inpString.equals("1")) {
 			System.out.print("Choose song title to add: ");
@@ -289,7 +300,8 @@ public class UI {
 			System.out.print("Choose artist for song: ");
 			if(!lib.addSongToPlaylist(playlist, inpString, scanner.nextLine().strip())) {
 				System.out.printf("Unable to add %s to playlist: song not in library.\n", inpString);
-			}
+			}else
+				System.out.println("Song has been added.");
 		} else if (inpString.equals("2")) {
 			System.out.print("Choose song to remove: ");
 			inpString = scanner.nextLine().strip();

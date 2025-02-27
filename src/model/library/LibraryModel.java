@@ -37,6 +37,15 @@ public class LibraryModel extends StoreFront {
 	public ArrayList<String> getPlaylists() {
 		ArrayList<String> temp = new ArrayList<>();
 		for(Playlist playlist : this.allPlaylists)
+			temp.add(playlist.getName());
+		
+		Collections.sort(temp);
+		return temp;
+	}
+	
+	public ArrayList<String> getPlaylistsFormatted() {
+		ArrayList<String> temp = new ArrayList<>();
+		for(Playlist playlist : this.allPlaylists)
 			temp.add(playlist.toString());
 		
 		Collections.sort(temp);
