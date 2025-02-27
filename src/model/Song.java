@@ -29,6 +29,7 @@ public final class Song {
 	}
 
 	public static Song fromAlbum(Album album) {
+		
 		return new Song(null, new Album(album));
 	}
 
@@ -84,6 +85,8 @@ public final class Song {
 
 	@Override
 	public String toString() {
+		if(this.album == null)
+			return this.title;
 		return this.title + " by " + this.getArtist();
 	}
 
