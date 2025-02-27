@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * 	name: the name of the playlist
  * 	playlistSongs: the ArrayList of songs that represents a playlist.
  * 
- * Method Signature:
+ * Methods:
  * 	public void addSong(Song): adds a song to the ArrayList of songs (playlistSongs)
  * 	public void removeSong(Song): removes a song from the ArrayList of songs (playlistSongs)
  * 	public String getName(): returns the name of the ArrayList of songs (playlistSongs)
@@ -25,6 +25,10 @@ public class Playlist {
 	private final String name;
 	private ArrayList<Song> playlistSongs = new ArrayList<>();
 
+	/*
+	 * 	Basic playlist constructor
+	 * 	@pre: name != null
+	 */
 	public Playlist(String name) {
 		this.name = name;
 	}
