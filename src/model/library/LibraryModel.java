@@ -8,7 +8,7 @@ import model.Rating;
 import model.Song;
 
 /*
- * 	Author:		Nathan Crutchfield
+ * 	Authors:	Nathan Crutchfield and Cameron Liu
  * 
  * 	Purpose: 	Sub class of StoreFront to represent the user library to
  * 				store songs, create playlists, rate, etc.
